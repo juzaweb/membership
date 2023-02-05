@@ -17,7 +17,8 @@ return new class extends Migration {
             function (Blueprint $table) {
                 $table->bigIncrements('id');
                 $table->string('name');
-                $table->float('price')->index();
+                $table->float('price')->index()->default(0);
+                $table->string('status', 50)->index()->default('draft');
                 $table->timestamps();
             }
         );

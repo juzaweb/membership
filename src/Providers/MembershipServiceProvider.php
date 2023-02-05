@@ -18,12 +18,7 @@ class MembershipServiceProvider extends ServiceProvider
     {
         ActionRegister::register([ResourceAction::class]);
     }
-
-    /**
-     * Register the service provider.
-     *
-     * @return void
-     */
+    
     public function register()
     {
         //

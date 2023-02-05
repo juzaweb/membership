@@ -12,11 +12,17 @@ use Juzaweb\Membership\Models\Package;
  */
 class PackageRepositoryEloquent extends BaseRepositoryEloquent implements PackageRepository
 {
-    /**
-     * Specify Model class name
-     *
-     * @return string
-     */
+    public function adminPaginate(int $limit, int $page = null, $columns = ['*']): mixed
+    {
+        $this->applyCriteria();
+        $this->applyScope();
+        $results = $this->model->paginate($limit, $columns, 'page', $page);
+        $results->appends(app('request')->query());
+        $this->resetModel();
+    
+        return $this->parserResult($results);
+    }
+    
     public function model(): string
     {
         return Package::class;

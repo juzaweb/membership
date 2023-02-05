@@ -18,5 +18,8 @@
         "psr-4": {
             "Juzaweb\\Membership\\": "src/"
         }
+    },
+    "require": {
+        "srmklive/paypal": "~3.0"
     }
 }
