@@ -1,0 +1,22 @@
+{
+    "name": "juzaweb/membership",
+    "description": "Membership",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Juzaweb\\Membership\\Providers\\MembershipServiceProvider"
+            ]
+        },
+        "juzaweb": {
+            "name": "Membership",
+            "domain": "membership",
+            "cms_min": "3.3",
+            "version": "1.0"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Juzaweb\\Membership\\": "src/"
+        }
+    }
+}
