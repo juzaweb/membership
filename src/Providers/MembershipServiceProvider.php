@@ -4,21 +4,19 @@ namespace Juzaweb\Membership\Providers;
 
 use Juzaweb\CMS\Facades\ActionRegister;
 use Juzaweb\CMS\Support\ServiceProvider;
-use Juzaweb\Membership\Actions\ResourceAction;
-use Juzaweb\Membership\Repositories\PackageRepository;
-use Juzaweb\Membership\Repositories\PackageRepositoryEloquent;
+use Juzaweb\Membership\Actions\MenuAction;
 
 class MembershipServiceProvider extends ServiceProvider
 {
     public array $bindings = [
-        PackageRepository::class => PackageRepositoryEloquent::class,
+        //
     ];
-    
+
     public function boot()
     {
-        ActionRegister::register([ResourceAction::class]);
+        ActionRegister::register([MenuAction::class]);
     }
-    
+
     public function register()
     {
         //
