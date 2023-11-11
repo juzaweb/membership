@@ -12,7 +12,7 @@ class MembershipServiceProvider extends ServiceProvider
         //
     ];
 
-    public function boot()
+    public function boot(): void
     {
         ActionRegister::register([MenuAction::class]);
     }

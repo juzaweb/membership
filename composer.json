@@ -9,9 +9,7 @@
         },
         "juzaweb": {
             "name": "Membership",
-            "domain": "membership",
-            "cms_min": "3.3",
-            "version": "1.0"
+            "domain": "membership"
         }
     },
     "autoload": {
@@ -20,6 +18,10 @@
         }
     },
     "require": {
-        "srmklive/paypal": "~3.0"
+        "juzaweb/subscription": "*"
+    },
+    "require-dev": {
+        "juzaweb/dev-tool": "^1.0",
+        "juzaweb/modules": "^1.0"
     }
 }

@@ -22,7 +22,7 @@ class MenuAction extends Action
         $this->addAction(Action::BACKEND_INIT, [$this, 'addMenuAdmin']);
     }
 
-    public function addMenuAdmin()
+    public function addMenuAdmin(): void
     {
         $this->hookAction->addAdminMenu(
             trans('membership::content.membership'),
