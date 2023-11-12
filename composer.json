@@ -1,15 +1,15 @@
 {
     "name": "juzaweb/membership",
+    "type": "juzaweb-plugin",
+    "license": "MIT",
     "description": "Membership",
     "extra": {
-        "laravel": {
+        "juzaweb": {
+            "name": "Membership",
+            "domain": "membership",
             "providers": [
                 "Juzaweb\\Membership\\Providers\\MembershipServiceProvider"
             ]
-        },
-        "juzaweb": {
-            "name": "Membership",
-            "domain": "membership"
         }
     },
     "autoload": {
