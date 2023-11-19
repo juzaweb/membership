@@ -15,7 +15,10 @@
     "autoload": {
         "psr-4": {
             "Juzaweb\\Membership\\": "src/"
-        }
+        },
+        "files": [
+            "helpers/helpers.php"
+        ]
     },
     "require": {
         "juzaweb/subscription": "*"
