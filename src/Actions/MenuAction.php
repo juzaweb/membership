@@ -4,6 +4,7 @@ namespace Juzaweb\Membership\Actions;
 
 use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\Subscription\Contrasts\Subscription;
+use Juzaweb\Subscription\Http\Resources\PlanResource;
 
 class MenuAction extends Action
 {
@@ -20,6 +21,7 @@ class MenuAction extends Action
     public function handle(): void
     {
         $this->addAction(Action::BACKEND_INIT, [$this, 'addMenuAdmin']);
+        $this->addFilter('user.resouce_data', [$this, 'addParamsUserResource']);
     }
 
     public function addMenuAdmin(): void
@@ -44,5 +46,15 @@ class MenuAction extends Action
                 ]
             ]
         );
+    }
+
+    public function addParamsUserResource($data)
+    {
+        $subscripted = has_subscription(jw_current_user());
+        $data['is_paid'] = is_paid_user(jw_current_user());
+        $data['plan'] = $subscripted?->plan ? PlanResource::make($subscripted->plan)
+            ->response()
+            ->getData() : null;
+        return $data;
     }
 }
