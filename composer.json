@@ -9,7 +9,8 @@
             "domain": "membership",
             "providers": [
                 "Juzaweb\\Membership\\Providers\\MembershipServiceProvider"
-            ]
+            ],
+            "networkable": true
         }
     },
     "autoload": {

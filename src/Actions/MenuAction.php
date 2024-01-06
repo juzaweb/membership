@@ -8,11 +8,6 @@ use Juzaweb\Subscription\Http\Resources\PlanResource;
 
 class MenuAction extends Action
 {
-    public function __construct(protected Subscription $subscription)
-    {
-        parent::__construct();
-    }
-
     /**
      * Execute the actions.
      *
@@ -20,8 +15,11 @@ class MenuAction extends Action
      */
     public function handle(): void
     {
-        $this->addAction(Action::BACKEND_INIT, [$this, 'addMenuAdmin']);
         $this->addFilter('user.resouce_data', [$this, 'addParamsUserResource']);
+
+        if (plugin_enabled('juzaweb/subscription')) {
+            $this->addAction(Action::BACKEND_INIT, [$this, 'addMenuAdmin']);
+        }
     }
 
     public function addMenuAdmin(): void
@@ -35,7 +33,7 @@ class MenuAction extends Action
             ]
         );
 
-        $this->subscription->registerModule(
+        app()->make(Subscription::class)->registerModule(
             'membership',
             [
                 'label' => trans('membership::content.membership'),
