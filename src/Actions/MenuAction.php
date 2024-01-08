@@ -48,8 +48,8 @@ class MenuAction extends Action
 
     public function addParamsUserResource($data)
     {
-        $subscripted = has_subscription(jw_current_user());
-        $data['is_paid'] = is_paid_user(jw_current_user());
+        $subscripted = has_subscription(jw_current_user(), 'membership');
+        $data['is_paid'] = is_paid_user(jw_current_user(), 'membership');
         $data['plan'] = $subscripted?->plan ? PlanResource::make($subscripted->plan)
             ->response()
             ->getData() : null;
