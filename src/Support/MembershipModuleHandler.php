@@ -15,9 +15,15 @@ use Juzaweb\Membership\Models\UserSubscription;
 use Juzaweb\Subscription\Contrasts\ModuleHandler;
 use Juzaweb\Subscription\Contrasts\PaymentResult;
 use Juzaweb\Subscription\Exceptions\PaymentException;
+use Juzaweb\Subscription\Support\Entities\SubscribeResult;
 
 class MembershipModuleHandler implements ModuleHandler
 {
+    public function onPayment(SubscribeResult $result): void
+    {
+        //
+    }
+
     public function onReturn(PaymentResult $result): void
     {
         $subscriber = UserSubscription::updateOrCreate(
