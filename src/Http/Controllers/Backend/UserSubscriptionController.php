@@ -16,8 +16,8 @@ class UserSubscriptionController extends BackendController
 {
     use ResourceController;
 
-    protected string $resourceKey = 'subscription-user-subscriptions';
-    protected string $viewPrefix = 'subscription::backend.user_subscription';
+    protected string $resourceKey = 'membership-user-subscriptions';
+    protected string $viewPrefix = 'membership::backend.user_subscription';
 
     public function __construct(protected Subscription $subscription)
     {

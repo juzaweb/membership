@@ -59,7 +59,7 @@ class UserSubscription extends Model
     public const STATUS_SUSPEND = 'suspend';
     public const STATUS_CANCEL = 'cancel';
 
-    protected $table = 'subscription_user_subscriptions';
+    protected $table = 'membership_user_subscriptions';
 
     protected $fillable = [
         'module',

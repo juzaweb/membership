@@ -3,7 +3,10 @@
 namespace Juzaweb\Membership\Actions;
 
 use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\Membership\Repositories\UserSubscriptionRepository;
+use Juzaweb\Membership\Support\MembershipModuleHandler;
 use Juzaweb\Subscription\Contrasts\Subscription;
+use Juzaweb\Subscription\Http\Datatables\UserSubscriptionDatatable;
 use Juzaweb\Subscription\Http\Resources\PlanResource;
 
 class MenuAction extends Action
@@ -37,11 +40,27 @@ class MenuAction extends Action
             'membership',
             [
                 'label' => trans('membership::content.membership'),
+                'handler' => MembershipModuleHandler::class,
                 'menu' => [
                     'icon' => 'fa fa-users',
                     'position' => 99,
                     'parent' => 'membership',
                 ]
+            ]
+        );
+
+        $this->hookAction->registerResource(
+            'membership-user-subscriptions',
+            null,
+            [
+                'label' => trans('membership::content.user_subscriptions'),
+                'repository' => UserSubscriptionRepository::class,
+                'datatable' => UserSubscriptionDatatable::class,
+                'menu' => [
+                    'icon' => 'fa fa-users',
+                    'position' => 30,
+                    'parent' => 'membership',
+                ],
             ]
         );
     }

@@ -25,8 +25,8 @@ class MembershipModuleHandler implements ModuleHandler
                 'user_id' => Auth::id(),
             ],
             [
-                'plan_id' => $plan->id,
-                'method_id' => $method->id,
+                'plan_id' => $result->plan->id,
+                'method_id' => $result->method->id,
                 'agreement_id' => $result->getAgreementId(),
                 'amount' => $result->getAmount(),
                 'status' => UserSubscription::STATUS_ACTIVE,
