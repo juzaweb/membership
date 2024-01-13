@@ -56,11 +56,17 @@ class MenuAction extends Action
                 'label' => trans('membership::content.user_subscriptions'),
                 'repository' => UserSubscriptionRepository::class,
                 'datatable' => UserSubscriptionDatatable::class,
-                'menu' => [
-                    'icon' => 'fa fa-users',
-                    'position' => 30,
-                    'parent' => 'membership',
-                ],
+                'menu' => null,
+            ]
+        );
+
+        $this->addAdminMenu(
+            trans('membership::content.user_subscriptions'),
+            'membership.user-subscriptions',
+            [
+                'icon' => 'fa fa-users',
+                'position' => 30,
+                'parent' => 'membership',
             ]
         );
     }

@@ -55,6 +55,7 @@ class UserSubscription extends Model
 {
     use UseUUIDColumn, ResourceModel, QueryCacheable, Networkable;
 
+    public const STATUS_PENDING = 'pending';
     public const STATUS_ACTIVE = 'active';
     public const STATUS_SUSPEND = 'suspend';
     public const STATUS_CANCEL = 'cancel';
@@ -74,6 +75,7 @@ class UserSubscription extends Model
     protected $casts = [
         'start_date' => 'datetime',
         'end_date' => 'datetime',
+        'amount' => 'float',
     ];
 
     public function user(): BelongsTo

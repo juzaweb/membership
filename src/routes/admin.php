@@ -10,3 +10,7 @@
 | contains the "admin" middleware group. Now create something great!
 |
 */
+
+use Juzaweb\Membership\Http\Controllers\Backend\UserSubscriptionController;
+
+Route::jwResource('membership/subscriptions', UserSubscriptionController::class);

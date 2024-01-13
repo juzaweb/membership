@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Juzaweb\Membership\Models\UserSubscription;
 
 return new class extends Migration {
     /**
@@ -27,6 +28,7 @@ return new class extends Migration {
                 $table->unsignedBigInteger('method_id');
                 $table->unsignedBigInteger('plan_id');
                 $table->unsignedBigInteger('user_id')->unique();
+                $table->string('status', 20)->default(UserSubscription::STATUS_PENDING)->index();
                 $table->timestamps();
 
                 $table->foreign('method_id', "{$prefix}_user_subscription_payment_methods_foreign")
