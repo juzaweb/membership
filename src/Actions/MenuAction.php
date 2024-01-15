@@ -24,19 +24,6 @@ class MenuAction extends Action
             $this->addAction(Action::INIT_ACTION, [$this, 'addMenuAdmin']);
         }
         $this->addAction(Action::FRONTEND_INIT, [$this, 'registerMembership']);
-        $this->addAction(Action::FRONTEND_CALL_ACTION, [$this, 'enqueueStyles']);
-    }
-
-    public function enqueueStyles(): void
-    {
-        $this->hookAction->enqueueFrontendScript(
-            'subs-js',
-            url('jw-styles/plugins/juzaweb/membership/js/frontend/index.js')
-        );
-        $this->hookAction->enqueueFrontendStyle(
-            'subs-css',
-            url('jw-styles/plugins/juzaweb/membership/css/frontend/index.css')
-        );
     }
 
     public function registerMembership(): void
