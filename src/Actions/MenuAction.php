@@ -21,7 +21,7 @@ class MenuAction extends Action
         $this->addFilter('user.resouce_data', [$this, 'addParamsUserResource']);
 
         if (plugin_enabled('juzaweb/subscription')) {
-            $this->addAction(Action::BACKEND_INIT, [$this, 'addMenuAdmin']);
+            $this->addAction(Action::INIT_ACTION, [$this, 'addMenuAdmin']);
         }
     }
 
