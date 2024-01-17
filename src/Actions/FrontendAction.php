@@ -33,7 +33,7 @@ class FrontendAction extends Action
             'membership',
             [
                'title' => __('Upgrade'),
-               'contents' => 'membership::frontend.index',
+               'contents' => 'membership::frontend.profile.upgrade',
                'data' => [
                     'plans' => fn () => PlanResource::collection(Plan::with(['features'])
                         ->whereIsActive()
