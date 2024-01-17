@@ -14,11 +14,11 @@ class FrontendAction extends Action
     {
         $this->hookAction->enqueueFrontendScript(
             'subs-js',
-            url('jw-styles/plugins/juzaweb/membership/js/frontend/pricing.min.js')
+            plugin_asset('js/frontend/pricing.min.js', 'juzaweb/membership')
         );
         $this->hookAction->enqueueFrontendStyle(
             'subs-css',
-            url('jw-styles/plugins/juzaweb/membership/css/frontend/pricing.min.css')
+            plugin_asset('css/frontend/pricing.min.css', 'juzaweb/membership')
         );
     }
 }

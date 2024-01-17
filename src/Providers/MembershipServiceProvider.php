@@ -15,8 +15,7 @@ class MembershipServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        ActionRegister::register([MenuAction::class]);
-        ActionRegister::register([FrontendAction::class]);
+        ActionRegister::register([MenuAction::class, FrontendAction::class]);
     }
 
     public function register(): void

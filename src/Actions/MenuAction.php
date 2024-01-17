@@ -31,11 +31,21 @@ class MenuAction extends Action
         $this->hookAction->registerProfilePage(
             'membership',
             [
-               'title' => 'Membership',
+               'title' => __('Upgrade'),
                'contents' => 'membership::frontend.index',
                'data' => [
-                    'plans' => Plan::with('features')->get(),
-                    'paymentMethods' => PaymentMethod::get(),
+                    'plans' => function () {
+                        return PlanResource::collection(Plan::with(['features'])
+                            ->whereIsActive()
+                            ->where(['module' => 'membership'])->get())
+                            ->toArray([]);
+                    },
+                    'paymentMethods' => function () {
+                        return PaymentMethodResource::collection(
+                            PaymentMethod::where(['module' => 'membership'])->get()
+                        )
+                            ->toArray([]);
+                    },
                 ],
             ]
         );
