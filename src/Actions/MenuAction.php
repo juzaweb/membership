@@ -21,34 +21,8 @@ class MenuAction extends Action
         $this->addFilter('user.resouce_data', [$this, 'addParamsUserResource']);
 
         if (plugin_enabled('juzaweb/subscription')) {
-            $this->addAction(Action::INIT_ACTION, [$this, 'addMenuAdmin']);
+            $this->addAction(Action::BACKEND_INIT, [$this, 'addMenuAdmin']);
         }
-        $this->addAction(Action::FRONTEND_INIT, [$this, 'registerMembership']);
-    }
-
-    public function registerMembership(): void
-    {
-        $this->hookAction->registerProfilePage(
-            'membership',
-            [
-               'title' => __('Upgrade'),
-               'contents' => 'membership::frontend.index',
-               'data' => [
-                    'plans' => function () {
-                        return PlanResource::collection(Plan::with(['features'])
-                            ->whereIsActive()
-                            ->where(['module' => 'membership'])->get())
-                            ->toArray([]);
-                    },
-                    'paymentMethods' => function () {
-                        return PaymentMethodResource::collection(
-                            PaymentMethod::where(['module' => 'membership'])->get()
-                        )
-                            ->toArray([]);
-                    },
-                ],
-            ]
-        );
     }
 
     public function addMenuAdmin(): void
