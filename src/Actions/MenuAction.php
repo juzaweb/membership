@@ -40,7 +40,7 @@ class MenuAction extends Action
             'membership',
             [
                 'label' => trans('membership::content.membership'),
-                'handler' => MembershipModuleHandler::class,
+                //'handler' => MembershipModuleHandler::class,
                 'menu' => [
                     'icon' => 'fa fa-users',
                     'position' => 99,

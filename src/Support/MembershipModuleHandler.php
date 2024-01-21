@@ -11,7 +11,6 @@
 namespace Juzaweb\Membership\Support;
 
 use Illuminate\Support\Facades\Auth;
-use Juzaweb\Membership\Models\UserSubscription;
 use Juzaweb\Subscription\Contrasts\ModuleHandler;
 use Juzaweb\Subscription\Contrasts\PaymentResult;
 use Juzaweb\Subscription\Exceptions\PaymentException;
