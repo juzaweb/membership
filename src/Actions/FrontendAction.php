@@ -2,8 +2,10 @@
 namespace Juzaweb\Membership\Actions;
 
 use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\Subscription\Http\Resources\PaymentHistoryResource;
 use Juzaweb\Subscription\Http\Resources\PaymentMethodResource;
 use Juzaweb\Subscription\Http\Resources\PlanResource;
+use Juzaweb\Subscription\Models\PaymentHistory;
 use Juzaweb\Subscription\Models\PaymentMethod;
 use Juzaweb\Subscription\Models\Plan;
 
@@ -12,7 +14,7 @@ class FrontendAction extends Action
     public function handle(): void
     {
         $this->addAction(Action::FRONTEND_CALL_ACTION, [$this, 'enqueueStyles']);
-        $this->addAction(Action::FRONTEND_INIT, [$this, 'registerMembership']);
+        $this->addAction(Action::FRONTEND_INIT, [$this, 'registerProfilePages']);
     }
 
     public function enqueueStyles(): void
@@ -27,8 +29,10 @@ class FrontendAction extends Action
         );
     }
 
-    public function registerMembership(): void
+    public function registerProfilePages(): void
     {
+        $user = request()->user();
+
         $this->hookAction->registerProfilePage(
             'membership',
             [
@@ -46,6 +50,21 @@ class FrontendAction extends Action
                         PaymentMethod::where(['module' => 'membership'])->get()
                     )
                         ->toArray([]),
+                ],
+            ]
+        );
+
+        $this->hookAction->registerProfilePage(
+            'payment-histories',
+            [
+               'title' => __('Payment Histories'),
+               'contents' => 'membership::frontend.profile.payment_history',
+               'data' => [
+                    'paymentHistories' => fn () => PaymentHistoryResource::collection(PaymentHistory::with(['plan'])
+                        ->where(['user_id' => $user->id])
+                        ->paginate(10)
+                    )
+                        ->response()->getData(true)
                 ],
             ]
         );
