@@ -14,7 +14,7 @@
             <th scope="row">{{ index + 1 }}</th>
             <td>{{ paymentHistory.plan.name }}</td>
             <td>{{ paymentHistory.amount }}</td>
-            <td>{% if paymentHistory.status == 'active' %} Success {% else %} Pending {% endif %}</td>
+            <td>{% if paymentHistory.status == 'active' %} {{ __('Success') }} {% else %} {{ __('Pending') }} {% endif %}</td>
             <td>{{ paymentHistory.created_at }}</td>
         </tr>
     {% endfor %}
