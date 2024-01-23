@@ -55,9 +55,9 @@ class FrontendAction extends Action
         );
 
         $this->hookAction->registerProfilePage(
-            'payment-history',
+            'payment-histories',
             [
-               'title' => __('Payment History'),
+               'title' => __('Payment Histories'),
                'contents' => 'membership::frontend.profile.payment_history',
                'data' => [
                     'paymentHistories' => fn () => PaymentHistoryResource::collection(PaymentHistory::with(['plan'])
