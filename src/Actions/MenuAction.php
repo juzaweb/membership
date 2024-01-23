@@ -3,6 +3,7 @@
 namespace Juzaweb\Membership\Actions;
 
 use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\Membership\Models\User;
 use Juzaweb\Membership\Support\MembershipModuleHandler;
 use Juzaweb\Subscription\Contrasts\Subscription;
 use Juzaweb\Subscription\Http\Datatables\SubscriptionDatatable;
@@ -41,6 +42,7 @@ class MenuAction extends Action
             [
                 'label' => trans('membership::content.membership'),
                 //'handler' => MembershipModuleHandler::class,
+                'model' => User::class,
                 'menu' => [
                     'icon' => 'fa fa-users',
                     'position' => 99,
