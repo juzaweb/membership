@@ -44,12 +44,11 @@ class FrontendAction extends Action
                         ->where(['module' => 'membership'])
                         ->get()
                     )
-                        ->toArray([])
-                    ,
+                        ->response()->getData(true)['data'],
                     'paymentMethods' => fn () => PaymentMethodResource::collection(
                         PaymentMethod::where(['module' => 'membership'])->get()
                     )
-                        ->toArray([]),
+                        ->response()->getData(true)['data'],
                 ],
             ]
         );
