@@ -6,21 +6,27 @@
         <th scope="col ">Plan name</th>
         <th scope="col">Amount</th>
         <th scope="col">Status</th>
-        <th scope="col">Agreement</th>
         <th scope="col">Created at</th>
         </tr>
     </thead>
-    <tbody>
-        {% for index,paymentHistory in paymentHistories %}
-            <tr>
-                <th scope="row">{{ index + 1 }}</th>
-                <td>{{ paymentHistory.plan.name }}</td>
-                <td>{{ paymentHistory.amount }}</td>
-                <td>{% if paymentHistory.status == 'active' %} Success {% else %} Pending {% endif %}</td>
-                <td>{{ paymentHistory.agreement_id }}</td>
-                <td>{{ paymentHistory.created_at }}</td>
-            </tr>
-        {% endfor %}
-    </tbody>
+        <tbody>
+        {% for index,paymentHistory in paymentHistories.data %}
+                <tr>
+                    <th scope="row">{{ index + 1 }}</th>
+                    <td>{{ paymentHistory.plan.name }}</td>
+                    <td>{{ paymentHistory.amount }}</td>
+                    <td>{% if paymentHistory.status == 'active' %} Success {% else %} Pending {% endif %}</td>
+                    <td>{{ paymentHistory.created_at }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
     </table>
+
+    <div class="mx-auto">
+        <div class="pagination-area">
+            <div class="pagination wow fadeIn animated" data-wow-duration="2s" data-wow-delay="0.5s" style="visibility: visible; animation-duration: 2s; animation-delay: 0.5s; animation-name: fadeIn;">
+                {{ paginate_links(paymentHistories, 'theme::components.pagination') }}
+            </div>
+        </div>
+    </div>
 </div>

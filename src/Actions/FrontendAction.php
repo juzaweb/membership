@@ -14,8 +14,7 @@ class FrontendAction extends Action
     public function handle(): void
     {
         $this->addAction(Action::FRONTEND_CALL_ACTION, [$this, 'enqueueStyles']);
-        $this->addAction(Action::FRONTEND_INIT, [$this, 'registerMembership']);
-        $this->addAction(Action::FRONTEND_INIT, [$this, 'registerPaymentHistory']);
+        $this->addAction(Action::FRONTEND_INIT, [$this, 'registerProfilePages']);
     }
 
     public function enqueueStyles(): void
@@ -30,8 +29,10 @@ class FrontendAction extends Action
         );
     }
 
-    public function registerMembership(): void
+    public function registerProfilePages(): void
     {
+        $user = request()->user();
+
         $this->hookAction->registerProfilePage(
             'membership',
             [
@@ -52,11 +53,6 @@ class FrontendAction extends Action
                 ],
             ]
         );
-    }
-
-    public function registerPaymentHistory(): void
-    {
-        $user = request()->user();
 
         $this->hookAction->registerProfilePage(
             'payment-history',
@@ -66,9 +62,9 @@ class FrontendAction extends Action
                'data' => [
                     'paymentHistories' => fn () => PaymentHistoryResource::collection(PaymentHistory::with(['plan'])
                         ->where(['user_id' => $user->id])
-                        ->get()
+                        ->paginate(10)
                     )
-                        ->toArray([])
+                        ->response()->getData(true)
                 ],
             ]
         );
