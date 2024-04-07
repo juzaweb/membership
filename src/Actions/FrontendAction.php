@@ -31,14 +31,15 @@ class FrontendAction extends Action
 
     public function registerProfilePages(): void
     {
-        $user = request()->user();
+        $user = request()?->user();
 
         $this->hookAction->registerProfilePage(
-            'membership',
+            'membership.upgrade',
             [
-               'title' => __('Upgrade'),
-               'contents' => 'membership::frontend.profile.upgrade',
-               'data' => [
+                'title' => __('Upgrade'),
+                'contents' => 'membership::frontend.profile.upgrade',
+                'icon' => 'shopping-cart',
+                'data' => [
                     'plans' => fn () => PlanResource::collection(Plan::with(['features'])
                         ->whereIsActive()
                         ->where(['module' => 'membership'])
@@ -54,11 +55,12 @@ class FrontendAction extends Action
         );
 
         $this->hookAction->registerProfilePage(
-            'payment-histories',
+            'membership.payment-histories',
             [
-               'title' => __('Payment Histories'),
-               'contents' => 'membership::frontend.profile.payment_history',
-               'data' => [
+                'title' => __('Payment Histories'),
+                'icon' => 'history',
+                'contents' => 'membership::frontend.profile.payment_history',
+                'data' => [
                     'paymentHistories' => fn () => PaymentHistoryResource::collection(PaymentHistory::with(['plan'])
                         ->where(['user_id' => $user->id])
                         ->paginate(10)
