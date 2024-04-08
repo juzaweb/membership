@@ -19,6 +19,8 @@ class SubscriptionFeatureAction extends Action
     {
         if (plugin_enabled('juzaweb/ads-manager')) {
             $this->addAction(Action::INIT_ACTION, [$this, 'registerSubscriptionFeatures']);
+
+            $this->addFilter('jwad.can_show_ads', [$this, 'filterCanShowAds']);
         }
     }
 
@@ -31,5 +33,30 @@ class SubscriptionFeatureAction extends Action
                 'module' => 'membership',
             ]
         );
+    }
+
+    public function filterCanShowAds($canShowAds): bool
+    {
+        $user = request()?->user();
+
+        if (!$user) {
+            return $canShowAds;
+        }
+
+        $plan = subscripted_plan($user, 'membership');
+
+        if (!$plan) {
+            return $canShowAds;
+        }
+
+        $planFeature = $plan->features()
+            ->where(['key' => 'view_ads'])
+            ->first();
+
+        if (!$planFeature || $planFeature->value != 1) {
+            return $canShowAds;
+        }
+
+        return false;
     }
 }
