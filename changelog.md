@@ -1,3 +1,7 @@
+### v1.0.1 
+* :+1: Filter show ads
+* :+1: Register plan feature
+
 ### v1.0.0 
 * :+1: Add readme.md
 * :sparkles: update response data page membership action
