@@ -5,15 +5,13 @@
             <div class="single-price">
                 <div class="deal-top">
                     <h3>{{ plan.name }}</h3>
-                    <h4> {{ plan.price }}
-                        <span class="sup">$</span>
-                    </h4>
+                    <h4> {{ plan.price }} <span class="sup">$</span></h4>
                 </div>
                 <div class="deal-bottom">
                     {% if plan.features %}
                     <ul class="deal-item">
                         {% for feature in plan.features %}
-                        <li><b>{{ feature.value|raw }}</b> {{ feature.title }}</li>
+                        <li><b>{{ feature.value != 1 ? feature.value|raw : '&#10003;' }}</b> {{ feature.title }}</li>
                         {% endfor %}
                     </ul>
                     {% endif %}

@@ -8,4 +8,4 @@ jobs:
     with:
       vendor: juzaweb
       plugin: membership
-      version: dev-${{ github.head_ref || github.ref_name }}
+      #version: dev-${{ github.head_ref || github.ref_name }}
