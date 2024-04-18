@@ -50,7 +50,7 @@ class SubscriptionFeatureAction extends Action
         }
 
         $planFeature = $plan->features()
-            ->where(['key' => 'view_ads'])
+            ->where(['feature_key' => 'view_ads'])
             ->first();
 
         if (!$planFeature || $planFeature->value != 1) {
