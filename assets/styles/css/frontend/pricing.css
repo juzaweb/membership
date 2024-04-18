@@ -79,6 +79,13 @@
     text-decoration: none;
 }
 
+.pricing-page .btn-area a.disabled {
+    background: #ddd;
+}
+
+.pricing-page .single-price:hover .btn-area a.disabled {
+    background: #ddd;
+}
 
 .pricing-page .single-price:hover {
     background: #16A086;

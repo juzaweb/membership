@@ -1,59 +1,71 @@
-<div class="pricing-page">
-    <div class="row">
-        {% for plan in plans %}
-        <div class="col-md-4 col-sm-6 col-xs-12">
-            <div class="single-price">
-                <div class="deal-top">
-                    <h3>{{ plan.name }}</h3>
-                    <h4> {{ plan.price }} <span class="sup">$</span></h4>
-                </div>
-                <div class="deal-bottom">
-                    {% if plan.features %}
-                    <ul class="deal-item">
-                        {% for feature in plan.features %}
-                        <li><b>{{ feature.value != 1 ? feature.value|raw : '&#10003;' }}</b> {{ feature.title }}</li>
-                        {% endfor %}
-                    </ul>
-                    {% endif %}
+{% extends 'cms::frontend.profile.layout' %}
 
-                    {% if plan.is_free is same as(false) %}
-                    <div class="btn-area">
-                        <a href="javascript:void(0)" class="js-upgrade w-100" data-plan="{{ plan.uuid }}">{{ __('Upgrade') }}</a>
+{% block profile_content %}
+    <div class="pricing-page">
+        <div class="row">
+            {% for plan in plans %}
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="single-price">
+                        <div class="deal-top">
+                            <h3>{{ plan.name }}</h3>
+                            <h4> {{ plan.price }} <span class="sup">$</span></h4>
+                        </div>
+                        <div class="deal-bottom">
+                            {% if plan.features %}
+                                <ul class="deal-item">
+                                    {% for feature in plan.features %}
+                                        {% if feature.feature_key %}
+                                            <li><b>{{ feature.value != 1 ? '&#10006;' : '&#10003;' }}</b> {{ feature.title }}</li>
+                                        {% else %}
+                                            <li><b>{{ feature.value|raw }}</b> {{ feature.title }}</li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+
+                            {% if plan.is_free is same as(false) %}
+                                <div class="btn-area">
+                                    <a href="javascript:void(0)"
+                                       class="w-100 {{ user.plan.id == plan.id ? 'disabled' : 'js-upgrade' }}"
+                                       data-plan="{{ plan.uuid }}">
+                                        {{ __('Upgrade') }}
+                                    </a>
+                                </div>
+                            {% else %}
+                                <div style="padding: 8px 64px;"></div>
+                            {% endif %}
+                        </div>
                     </div>
-                    {% else %}
-                        <div style="padding: 8px 64px;"></div>
-                    {% endif %}
                 </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="upgrade-form mt-3" {% if old('method') is empty %} style="display: none;" {%  endif %}>
+        <div class="row">
+            <div class="col-md-6">
+                <form action="{{ url('subscription/membership/payment') }}" method="post">
+                    {{ csrf_field() }}
+
+                    <input type="hidden" name="plan" value="{{ old('plan') }}">
+                    <input type="hidden" name="cancel_url" value="{{ url().current() }}">
+                    <input type="hidden" name="return_url" value="{{ url().current() }}">
+
+                    <label>{{ __('Payment method') }}</label>
+
+                    <div class="form-group pass_show">
+                        <select name="method" class="form-control" required>
+                            {% for method in paymentMethods %}
+                                <option value="{{ method.method }}">{{ method.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">{{ __('Upgrade') }}</button>
+                    </div>
+                </form>
             </div>
         </div>
-        {% endfor %}
     </div>
-</div>
-
-<div class="upgrade-form mt-3" {% if old('method') is empty %} style="display: none;" {%  endif %}>
-    <div class="row">
-        <div class="col-md-6">
-            <form action="{{ url('subscription/membership/payment') }}" method="post">
-                {{ csrf_field() }}
-
-                <input type="hidden" name="plan">
-                <input type="hidden" name="cancel_url" value="{{ url().current() }}">
-                <input type="hidden" name="return_url" value="{{ url().current() }}">
-
-                <label>{{ __('Payment method') }}</label>
-
-                <div class="form-group pass_show">
-                    <select name="method" class="form-control" required>
-                        {% for method in paymentMethods %}
-                        <option value="{{ method.method }}">{{ method.name }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <button type="submit" class="btn btn-success">{{ __('Upgrade') }}</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+{% endblock %}

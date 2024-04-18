@@ -58,7 +58,7 @@ class MenuAction extends Action
         $data['is_paid'] = is_paid_user(jw_current_user(), 'membership');
         $data['plan'] = $subscripted?->plan ? PlanResource::make($subscripted->plan)
             ->response()
-            ->getData() : null;
+            ->getData(true)['data'] : null;
         return $data;
     }
 }
