@@ -16,7 +16,7 @@ class MenuAction extends Action
      */
     public function handle(): void
     {
-        $this->addFilter('frontend.view_share_user_data', [$this, 'addParamsUserResource']);
+        $this->addFilter('user.resouce_data', [$this, 'addParamsUserResource']);
 
         if (plugin_enabled('juzaweb/subscription')) {
             $this->addAction(Action::INIT_ACTION, [$this, 'addMenuAdmin']);
