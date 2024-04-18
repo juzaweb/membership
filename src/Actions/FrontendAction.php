@@ -21,7 +21,9 @@ class FrontendAction extends Action
     {
         $this->hookAction->enqueueFrontendScript(
             'subs-js',
-            plugin_asset('js/frontend/pricing.min.js', 'juzaweb/membership')
+            plugin_asset('js/frontend/pricing.min.js', 'juzaweb/membership'),
+            '1.0',
+            true
         );
         $this->hookAction->enqueueFrontendStyle(
             'subs-css',
