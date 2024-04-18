@@ -1,3 +1,6 @@
+### v1.0.3 
+* :bug: Fix load features plan
+
 ### v1.0.2 
 * :bug: Fix show ads feature
 * :bug: Fix upgrade request
