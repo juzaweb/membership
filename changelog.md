@@ -1,3 +1,8 @@
+### v1.0.2 
+* :bug: Fix show ads feature
+* :bug: Fix upgrade request
+* :bug: Fix plugin test
+
 ### v1.0.1 
 * :+1: Filter show ads
 * :+1: Register plan feature
