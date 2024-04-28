@@ -9,8 +9,10 @@ Paid Memberships Pro is a complete solution to secure your content and create a 
 
 - [x] Plan management
 - [x] Paypal subscription
-- [x] Add page payment history frontend
+- [x] Payment history in profile page
 - [x] Upgrade in profile page
+- [x] Subscription management
+- [x] Disabled ADs by plan (using Ads Manager plugin)
 
 ### Requirements
 - Juzaweb CMS
