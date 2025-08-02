@@ -1,0 +1,11 @@
+{
+    "name": "Membership",
+    "alias": "membership",
+    "description": "Membership Module",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Juzaweb\\Modules\\Membership\\Providers\\MembershipServiceProvider"
+    ],
+    "files": []
+}

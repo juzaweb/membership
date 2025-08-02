@@ -1,31 +1,12 @@
 {
     "name": "juzaweb/membership",
-    "type": "juzaweb-plugin",
+    "type": "juzaweb-module",
     "license": "MIT",
-    "description": "Membership",
-    "extra": {
-        "juzaweb": {
-            "name": "Membership",
-            "domain": "membership",
-            "providers": [
-                "Juzaweb\\Membership\\Providers\\MembershipServiceProvider"
-            ],
-            "networkable": true
+    "description": "Membership Module",
+    "authors": [
+        {
+            "name": "Juzaweb CMS",
+            "email": "admin@juzaweb.com"
         }
-    },
-    "autoload": {
-        "psr-4": {
-            "Juzaweb\\Membership\\": "src/"
-        },
-        "files": [
-            "helpers/helpers.php"
-        ]
-    },
-    "require": {
-        "juzaweb/subscription": "*"
-    },
-    "require-dev": {
-        "juzaweb/dev-tool": "^1.0",
-        "juzaweb/modules": "^1.0"
-    }
+    ]
 }
