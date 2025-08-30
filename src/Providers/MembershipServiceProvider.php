@@ -2,7 +2,10 @@
 
 namespace Juzaweb\Modules\Membership\Providers;
 
+use Juzaweb\Core\Facades\Menu;
 use Juzaweb\Core\Providers\ServiceProvider;
+use Juzaweb\Modules\Membership\Services\MembershipSubscription;
+use Juzaweb\Modules\Subscription\Contracts\Subscription;
 
 class MembershipServiceProvider extends ServiceProvider
 {
@@ -13,7 +16,16 @@ class MembershipServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $this->app[Subscription::class]->registerModule(
+            'membership',
+            function () {
+                return new MembershipSubscription();
+            }
+        );
+
+        $this->booted(function () {
+            $this->registerMenus();
+        });
     }
 
     /**
@@ -26,7 +38,7 @@ class MembershipServiceProvider extends ServiceProvider
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
-        $this->loadMigrationsFrom(__DIR__ . '/../Database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
         $this->app->register(RouteServiceProvider::class);
     }
 
@@ -38,9 +50,9 @@ class MembershipServiceProvider extends ServiceProvider
     protected function registerConfig(): void
     {
         $this->publishes([
-            __DIR__ . '/../config/config.php' => config_path('membership.php'),
+            __DIR__ . '/../../config/membership.php' => config_path('membership.php'),
         ], 'config');
-        $this->mergeConfigFrom(__DIR__ . '/../config/config.php', 'membership');
+        $this->mergeConfigFrom(__DIR__ . '/../../config/membership.php', 'membership');
     }
 
     /**
@@ -70,5 +82,11 @@ class MembershipServiceProvider extends ServiceProvider
         ], ['views', 'membership-module-views']);
 
         $this->loadViewsFrom($sourcePath, 'membership');
+    }
+
+    protected function registerMenus()
+    {
+        Menu::make('subscription-methods', __('Subscription Methods'))
+            ->parent('settings');
     }
 }
