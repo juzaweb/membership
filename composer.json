@@ -8,5 +8,14 @@
             "name": "Juzaweb CMS",
             "email": "admin@juzaweb.com"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-4": {
+            "Juzaweb\\Modules\\Membership\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^8.2",
+        "juzaweb/subscription": "*"
+    }
 }
